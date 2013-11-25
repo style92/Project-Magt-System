@@ -1,0 +1,52 @@
+.msg .x-box-mc {
+    font-size:14px;
+}
+#msg-div {
+    position:absolute;
+    left:35%;
+    top:10px;
+    width:250px;
+    z-index:20000;
+}
+.msg-box-error {
+	color:red;
+}
+.msg-box-success {
+	color:#0000FF;
+}
+
+.icon-btn-add {
+	background-image: url(../images/add.png) !important;
+}
+
+.icon-btn-edit {
+	background-image: url(../images/edit.png) !important;
+}
+
+.icon-btn-del {
+	background-image: url(../images/cross.png) !important;
+}
+
+.icon-btn-search {
+	background-image: url(../images/search.png) !important;
+}
+
+.icon-btn-save {
+	background-image: url(../images/save.png) !important;
+}
+
+.icon-btn-refresh {
+	background-image: url(../images/refresh.png) !important;
+}
+
+#header {
+	background: #7F99BE url(../images/logo_bg.jpg) repeat-x center;
+}
+
+#header h1 {
+	font-size: 25px;
+	font-weight: bold;
+	color: #fff;
+	padding: 8px 10px;
+}
+

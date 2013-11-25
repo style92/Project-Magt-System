@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 指定全局国际化资源文件 -->
+	<constant name="struts.custom.i18n.resources" value="mess"></constant>
+	<!-- 指定国际化编码所使用的字符集 -->
+	<constant name="struts.i18n.encoding" value="GBK"></constant>
+
+	<constant name="struts.devMode" value="true" />
+	<include file="com/pmsystem/struts/configxml/struts-pj.xml" />
+	<include file="com/pmsystem/struts/configxml/struts-fr.xml" />
+
+</struts>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-autowire="byName">
+	
+	<bean id="projectService" class="com.pmsystem.service.pj.ProjectServiceImpl">
+		<property name="projectDAO" ref="projectDAO"/>
+		<!-- ProjectService 类中的参量 -->
+	</bean>
+</beans>
