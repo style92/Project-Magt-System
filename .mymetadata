@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="ServerDemo"
+  name="Project-Magt-System"
   id="myeclipse.1378983945580"
   context-root="/ServerDemo"
   j2ee-spec="5.0"
-  archive="ServerDemo.war">
+  archive="Project-Magt-System.war">
   <attributes>
     <attribute name="webrootdir" value="/WebRoot" />
   </attributes>

@@ -1,33 +1,6 @@
 var proManageFun = function() {
 	var pageSize = 20;
 
-	/*
-	 * var newProjectForm = new Ext.form.FormPanel({ frame : true, //
-	 * defaultType : "textfield", defaults : { width : 230 }, // labelAlign :
-	 * "center", labelWidth : 60, labelPad : 5, items : [{ id : "proName", xtype :
-	 * "textfield", fieldLabel : "项目名称", name : "Project.proName", allowBlank :
-	 * false, emptyText : "请输入项目名称...", anchor : '100%', listeners : { render :
-	 * function(obj) { var font = document.createElement("font");
-	 * font.setAttribute("color", "red"); var redStar =
-	 * document.createTextNode(' *'); font.appendChild(redStar);
-	 * obj.el.dom.parentNode.appendChild(font); } } }, { id : "typeName", xtype :
-	 * "textarea", fieldLabel : "项目简介", name : "Project.desc", // allowBlank :
-	 * false, emptyText : "请输入项目简介...", // grow : true, anchor : '100%' }],
-	 * buttonAlign : 'center', minButtonWidth : 60, buttons : [{ text : '提交',
-	 * tooltip : "提交数据", hadler : function() { newProjectForm.getForm().submit({
-	 * url : "ProductType/addProductType.action", waitTitle : '请等待', waitMsg :
-	 * '正在提交中', success : function(f, action) { Ext.Msg.alert('提示', '添加成功'); //
-	 * _grid.getStore().reload(); }, failure : function(f, action) {
-	 * Ext.Msg.alert('提示', '添加失敗！'); } }); } }, { text : "取消", tooltip :
-	 * "取消此操作", handler : function() { Ext.getCmp("win").close();// 取消实际上就是关闭窗口 } }]
-	 * });
-	 * 
-	 * var win = new Ext.Window({ title : '新建项目', width : 500, height : 200,
-	 * layout : 'fit', closeAction : 'hide', animateTarget : 'addType',//
-	 * 当指定一个id或元素,window打开时会与元素之间产生动画效果 resizable : false,// 不可以调整大小 modal :
-	 * true,// 设置此Window为模式窗口, items : [newProjectForm] });
-	 */
-
 	// 添加操作
 	var addFn = function(_url, rec, param, titleText) {
 		new Ext.Window({
@@ -101,7 +74,8 @@ var proManageFun = function() {
 								Ext.example.msg("提交成功", "提交订单类型信息成功……",
 										"msg-box-success");// 相应的提示信息
 								Ext.getCmp("addWin").close(); // 根据id获取到表单的窗口，然后将其关闭
-								//_grid.getStore().reload(); // 提交成功后，需要刷新GridPanel数据，
+								// _grid.getStore().reload(); //
+								// 提交成功后，需要刷新GridPanel数据，
 
 							},
 
@@ -128,35 +102,6 @@ var proManageFun = function() {
 		}).show();
 
 	}
-	var sm = new Ext.grid.CheckboxSelectionModel();// 创建带复选框的选择模型
-	var cm = new Ext.grid.ColumnModel([
-			new Ext.grid.RowNumberer(),// 在第一列显示固定不动的行
-			sm, {
-				header : '项目编号',
-				dataIndex : 'id'
-			}, {
-				header : '项目名称',
-				dataIndex : 'name'
-			}, {
-				header : '日期',
-				dataIndex : 'descn'
-			}]);
-
-	var data = [['1', 'name1', 'descn1'], ['2', 'name2', 'descn2'],
-			['3', 'name3', 'descn3'], ['4', 'name4', 'descn4'],
-			['5', 'name5', 'descn5']];
-
-	var store = new Ext.data.Store({
-				proxy : new Ext.data.MemoryProxy(data),
-				reader : new Ext.data.ArrayReader({}, [{
-									name : 'id'
-								}, {
-									name : 'name'
-								}, {
-									name : 'descn'
-								}])
-			});
-	store.load();
 
 	var btn_view = new Ext.Button({
 				text : "查看项目",
@@ -198,40 +143,62 @@ var proManageFun = function() {
 				iconCls : 'icon-btn-search'
 			});
 
-	var _grid = new Ext.grid.EditorGridPanel({
-				id : 'projectGrid',
-				region : 'center',
-				iconCls : "icon-grid",
-				viewConfig : {
-					forceFit : true
+	Ext.create('Ext.data.Store', {
+				storeId : 'simpsonsStore',
+				fields : ['name', 'email', 'phone'],
+				data : {
+					'items' : [{
+								'name' : 'Lisa',
+								"email" : "lisa@simpsons.com",
+								"phone" : "555-111-1224"
+							}, {
+								'name' : 'Bart',
+								"email" : "bart@simpsons.com",
+								"phone" : "555-222-1234"
+							}, {
+								'name' : 'Homer',
+								"email" : "home@simpsons.com",
+								"phone" : "555-222-1244"
+							}, {
+								'name' : 'Marge',
+								"email" : "marge@simpsons.com",
+								"phone" : "555-222-1254"
+							}]
 				},
-				loadMask : {
-					msg : '数据正在加载中，请稍候...'
-				},
-				frame : true,
-				renderTo : 'test',
-				columnLines : true,
-				store : store,
-				sm : sm,
-				cm : cm,
-				clicksToEdit : 1,
-				enableColumnMove : false,
-				trackMouseOver : true,
-				// frame : true
-				autoScroll : true,
-				// autoHeight: true,
-				height : Ext.get('test').getHeight(),
-				tbar : [btn_view, '-', btn_del, '-', btn_freeze, '->', btn_add,
-						'-', btn_search],
-				bbar : new Ext.PagingToolbar({
-							id : "toolbar1",
-							store : store,
-							pageSize : pageSize,
-							displayInfo : true,
-							displayMsg : "第 {0} - {1} 条&nbsp;&nbsp;共 {2} 条",
-							emptyMsg : "没有记录"
-						})
-
+				proxy : {
+					type : 'memory',
+					reader : {
+						type : 'json',
+						root : 'items'
+					}
+				}
 			});
+
+	_grid = Ext.create('Ext.grid.Panel', {
+		title : '项目管理',
+		store : Ext.data.StoreManager.lookup('simpsonsStore'),
+		columns : [{
+					text : 'Name',
+					dataIndex : 'name'
+				}, {
+					text : 'Email',
+					dataIndex : 'email',
+					flex : 1
+				}, {
+					text : 'Phone',
+					dataIndex : 'phone'
+				}],
+		tbar : [btn_view, '-', btn_del, '-', btn_freeze, '->', btn_add, '-',
+				btn_search],
+		bbar : new Ext.PagingToolbar({
+					id : "toolbar1",
+					store : Ext.data.StoreManager.lookup('simpsonsStore'),
+					pageSize : pageSize,
+					displayInfo : true,
+					displayMsg : "第 {0} - {1} 条&nbsp;&nbsp;共 {2} 条",
+					emptyMsg : "没有记录"
+				})
+		});
+
 	return _grid;
 }
